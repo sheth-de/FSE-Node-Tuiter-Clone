@@ -6,8 +6,8 @@ import bodyParser from "body-parser";
 import UserController from "./controllers/UserController";
 import TuitController from "./controllers/TuitController";
 
-
-mongoose.connect('mongodb://127.0.0.1:27017/tuiter');
+mongoose.connect('mongodb+srv://shethdeva04:MongoConnection123@cluster0.lqk17.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
+// mongoose.connect('mongodb://127.0.0.1:27017/tuiter');
 
 app.use(bodyParser.json())
 
