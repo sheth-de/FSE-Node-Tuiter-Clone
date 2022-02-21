@@ -1,5 +1,4 @@
 import mongoose, {Schema} from "mongoose";
-import UserSchema from "./UserSchema";
 
 const TuitSchema = new mongoose.Schema({
   tuit: {type: String, required: true},

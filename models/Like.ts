@@ -1,5 +1,5 @@
-import Tuit from "../tuits/Tuit";
-import User from "../users/User";
+import Tuit from "./Tuit";
+import User from "./User";
 
 export default interface Like {
     tuit: Tuit,
