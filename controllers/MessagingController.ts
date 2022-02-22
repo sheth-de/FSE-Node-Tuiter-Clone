@@ -1,6 +1,6 @@
 import {Express, Request, Response} from "express";
 import MessagingDao from "../daos/MessagingDao";
-import MessagingControllerI from "../interfaces/MessagingControllerI";
+import MessagingControllerI from "../interfaces/messaging/MessagingControllerI";
 import Messaging from "../models/Messaging";
 
 export default class MessagingController implements MessagingControllerI{

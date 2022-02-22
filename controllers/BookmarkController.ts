@@ -1,5 +1,5 @@
 import {Express, Request, Response} from "express";
-import BookmarkControllerI from "../interfaces/BookmarkControllerI";
+import BookmarkControllerI from "../interfaces/bookmarks/BookmarkControllerI";
 import BookmarkDao from "../daos/BookmarkDao";
 
 

@@ -1,7 +1,7 @@
 import TuitDao from "../daos/TuitDao";
 import Tuit from "../models/Tuit";
 import {Express, Request, Response} from "express";
-import TuitControllerI from "../interfaces/TuitController";
+import TuitControllerI from "../interfaces/tuits/TuitController";
 
 export default class TuitController implements TuitControllerI {
     private static tuitDao: TuitDao = TuitDao.getInstance();

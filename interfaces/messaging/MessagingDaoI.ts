@@ -1,4 +1,4 @@
-import Messaging from "../models/Messaging";
+import Messaging from "../../models/Messaging";
 
 export default interface MessagingDaoI {
     findMessagesSent(from: string): Promise<Messaging[]>;

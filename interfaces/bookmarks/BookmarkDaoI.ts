@@ -1,4 +1,4 @@
-import Bookmark from "../models/Bookmark";
+import Bookmark from "../../models/Bookmark";
 
 export default interface BookmarkDaoI {
     findAllTuitsBookmarkedByUser (uid: string): Promise<Bookmark[]>;

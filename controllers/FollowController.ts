@@ -1,5 +1,5 @@
 import {Express, Request, Response} from "express";
-import FollowControllerI from "../interfaces/FollowControllerI";
+import FollowControllerI from "../interfaces/follow/FollowControllerI";
 import FollowDao from "../daos/FollowDao";
 
 export default class FollowController implements FollowControllerI{
