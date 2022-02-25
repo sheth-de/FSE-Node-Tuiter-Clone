@@ -1,3 +1,6 @@
+/**
+ * @file creates a mongoose collection for location in the mongodb database with the given schema
+ */
 import mongoose from "mongoose";
 
 const LocationSchema = new mongoose.Schema({

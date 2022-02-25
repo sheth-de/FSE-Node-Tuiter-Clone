@@ -1,3 +1,6 @@
+/**
+ * @file creates a mongoose collection for bookmarks in the mongodb database with the given schema
+ */
 import mongoose, {Schema} from "mongoose";
 import Bookmark from "../../models/Bookmark";
 

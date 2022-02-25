@@ -1,3 +1,6 @@
+/**
+ * @file creates a mongoose collection for follows in the mongodb database with the given schema
+ */
 import mongoose, {Schema} from "mongoose";
 import Follow from "../../models/Follow";
 

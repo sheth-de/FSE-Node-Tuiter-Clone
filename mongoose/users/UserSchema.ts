@@ -1,4 +1,8 @@
+/**
+ * @file creates a mongoose collection for users in the mongodb database with the given schema
+ */
 import mongoose from "mongoose";
+
 const UserSchema = new mongoose.Schema({
    username: {type: String, required: true},
    password: {type: String, required: true},

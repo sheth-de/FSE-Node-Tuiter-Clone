@@ -1,3 +1,6 @@
+/**
+ * @file creates a mongoose collection for likes in the mongodb database with the given schema
+ */
 import mongoose, {Schema} from "mongoose";
 import Like from "../../models/Like";
 
