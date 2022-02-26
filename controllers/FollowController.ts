@@ -14,6 +14,8 @@ import FollowDao from "../daos/FollowDao";
  *     <li>DELETE /api/users/:uid1/follows/:uid2 to delete a follow instance that was initially created where user with uid1 used to follow user with uid2</li>
  *     <li>GET /api/users/:uid/following to retrieve the list of accounts followed by the user </li>
  *     <li>GET /api/users/:uid/followers to retrieve list of accounts that follow the user </li>
+ *     <li>GET /api/users/:uid1/following/:uid2 check if uid2 is present in the following list of uid1</li>
+ *      <li>GET /api/users/:uid1/follower/:uid2 check if uid2 is present in the followers list of uid1</li>
  * </ul>
  * @property {FollowDao} followDao Singleton DAO implementing user CRUD operations
  * @property {FollowController} followController Singleton controller implementing
@@ -36,6 +38,8 @@ export default class FollowController implements FollowControllerI {
             app.get("/api/users/:uid/followers", FollowController.followController.findFollowers);
             app.post("/api/users/:uid1/follows/:uid2", FollowController.followController.userFollowsUser);
             app.delete("/api/users/:uid1/follows/:uid2", FollowController.followController.userUnfollowsUser);
+            app.get("/api/users/:uid1/following/:uid2", FollowController.followController.checkIfUserPresentInFollowing);
+            app.get("/api/users/:uid1/follower/:uid2", FollowController.followController.checkIfUserPresentInFollowers);
         }
         return FollowController.followController;
     }
@@ -87,4 +91,24 @@ export default class FollowController implements FollowControllerI {
     userUnfollowsUser = (req: Request, res: Response) =>
         FollowController.followDao.userUnfollowsUser(req.params.uid1, req.params.uid2)
             .then(status => res.send(status));
+
+    /**
+     * Checks if a user is present in the following list of the current user
+     * @param {Request} req Represents request from client
+     * @param {Response} res Represents response to client, including the
+     * body formatted as JSON arrays containing the follows objects
+     */
+    checkIfUserPresentInFollowing = (req: Request, res: Response) =>
+        FollowController.followDao.checkIfUserPresentInFollowing(req.params.uid1, req.params.uid2)
+            .then(follows => res.json(follows));
+
+    /**
+     * Checks if a user is present in the followers list of the current user
+     * @param {Request} req Represents request from client
+     * @param {Response} res Represents response to client, including the
+     * body formatted as JSON arrays containing the follows objects
+     */
+    checkIfUserPresentInFollowers = (req: Request, res: Response) =>
+        FollowController.followDao.checkIfUserPresentInFollowers(req.params.uid1, req.params.uid2)
+            .then(follows => res.json(follows));
 }

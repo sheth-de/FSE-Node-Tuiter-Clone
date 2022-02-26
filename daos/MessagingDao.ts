@@ -65,4 +65,23 @@ export default class MessagingDao implements MessagingDaoI {
             .find({to: to})
             .populate("message")
             .exec();
+
+    /**
+     * Uses MessagingModel to retrieve messages received by the logged-in user from selected user
+     * @param {string} to logged-in User's primary key
+     * @param{string} from the primary key of selected user
+     * @returns Promise To be notified when messages are retrieved from the database
+     */
+    checkMessagesReceivedFromUser = async (to: string, from: string): Promise<Messaging[]> =>
+        MessagingModel.find({to: to, from: from});
+
+    /**
+     * Uses MessagingModel to retrieve messages sent by the logged-in user to a selected user
+     * @param {string} from logged-in User's primary key
+     * @param {string} to is the selected user's primary key
+     * @returns Promise To be notified when messages are retrieved from the database
+     */
+    checkMessagesSentByUser = async (from: string, to: string): Promise<Messaging[]> =>
+        MessagingModel.find({to: to, from: from});
+
 }

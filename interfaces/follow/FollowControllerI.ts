@@ -44,4 +44,20 @@ export default interface FollowControllerI {
      * on whether deleting a user was successful or not
      */
     userUnfollowsUser (req: Request, res: Response): void;
+
+    /**
+     * Checks if a user is present in the following list of the current user
+     * @param {Request} req Represents request from client
+     * @param {Response} res Represents response to client, including the
+     * body formatted as JSON arrays containing the follows objects
+     */
+    checkIfUserPresentInFollowing(req: Request, res: Response) : void;
+
+    /**
+     * Checks if a user is present in the followers list of the current user
+     * @param {Request} req Represents request from client
+     * @param {Response} res Represents response to client, including the
+     * body formatted as JSON arrays containing the follows objects
+     */
+    checkIfUserPresentInFollowers(req: Request, res: Response) : void;
 };

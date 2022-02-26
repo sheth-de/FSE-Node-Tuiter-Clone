@@ -46,4 +46,22 @@ export default interface MessagingControllerI {
      * body formatted as JSON arrays containing the message objects
      */
     findMessagesReceived (req: Request, res: Response): void;
+
+    /**
+     * Retrieves all messages that were received by the logged-in user from a selected user
+     * @param {Request} req Represents request from client, including the path
+     * parameter "to" representing the primary key of the logged-in user
+     * @param {Response} res Represents response to client, including the
+     * body formatted as JSON arrays containing the message objects
+     */
+    checkMessagesReceivedFromUser (req: Request, res: Response): void;
+
+    /**
+     * Retrieves all messages that were sent by the logged-in user to a selected user
+     * @param {Request} req Represents request from client, including the path
+     * parameter "from" representing the primary key of the logged-in user
+     * @param {Response} res Represents response to client, including the
+     * body formatted as JSON arrays containing the message objects
+     */
+    checkMessagesSentByUser (req: Request, res: Response): void;
 }

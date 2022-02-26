@@ -39,4 +39,19 @@ export default interface BookmarkDaoI {
      * @returns Promise To be notified when bookmark instance is removed from the database
      */
     userUnBookmarksTuit (tid: string, uid: string): Promise<any>;
+
+    /**
+     * Uses BookmarkMdel to check if a tuit is bookmarked by the user or not
+     * @param {string} tid tuit's primary key
+     * @param {string} uid user's primary key
+     * @returns Promise To be notified whether or not the tuit is bookmarked from database
+     */
+    checkIfATuitIsBookmarkedByUser (uid: string, tid:string) :Promise<any>;
+
+    /**
+     * Removes all bookmarks of a user from the database.
+     * @param {string} uid Primary key of logged-in user
+     * @returns Promise To be notified when bookmark instances are removed from the database
+     */
+    deleteAllBookmarksForUser(uid:string): Promise<any>;
 };

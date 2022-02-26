@@ -64,4 +64,21 @@ export default class BookmarkDao implements BookmarkDaoI{
      */
     userUnBookmarksTuit = async (tid: string, uid: string) : Promise<any> =>
         BookmarkModel.deleteOne({bookmarkedTuit: tid, BookmarkedBy:uid});
+
+    /**
+     * Uses BookmarkMdel to check if a tuit is bookmarked by the user or not
+     * @param {string} tid tuit's primary key
+     * @param {string} uid user's primary key
+     * @returns Promise To be notified whether or not the tuit is bookmarked from database
+     */
+    checkIfATuitIsBookmarkedByUser = async (uid: string, tid:string) : Promise<any> =>
+        await BookmarkModel.find({bookmarkedTuit: tid, BookmarkedBy: uid}).count()>0;
+
+    /**
+     * Removes all bookmarks of a user from the database.
+     * @param {string} uid Primary key of logged-in user
+     * @returns Promise To be notified when bookmark instances are removed from the database
+     */
+    deleteAllBookmarksForUser = async (uid: string) : Promise<any> =>
+        BookmarkModel.deleteMany({BookmarkedBy: uid});
 }

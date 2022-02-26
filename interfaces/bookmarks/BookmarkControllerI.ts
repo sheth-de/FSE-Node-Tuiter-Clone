@@ -36,4 +36,21 @@ export default interface BookmarkControllerI {
      * on whether deleting a user was successful or not
      */
     userUnBookmarksTuit (req: Request, res: Response): void;
+
+    /**
+     * Checks if a tuit is bookmarked by the user or not.
+     * @param {Request} req Represents request from client
+     * @param {Response} res Represents response to client, including boolean result
+     */
+    checkIfATuitIsBookmarkedByUser (req: Request, res: Response): void;
+
+    /**
+     * Removes all bookmark instances from the user account
+     * @param {Request} req Represents request from client, including path
+     * parameter uid identifying the primary key of the logged-in user and tid identifying the primary
+     * key of the tuit that need to be removed form the bookmarks list of the user
+     * @param {Response} res Represents response to client, including status
+     * on whether deleting a user was successful or not
+     */
+    deleteAllBookmarksForUser (req: Request, res: Response): void;
 }

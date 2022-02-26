@@ -13,6 +13,8 @@ import BookmarkDao from "../daos/BookmarkDao";
  *     <li>POST /api/users/:uid/bookmarks/:tid to bookmark a tuit with mentioned tid by a user with mentioned uid</li>
  *     <li>GET /api/users/:uid/bookmarks to retrieve an individual user's bookmarks </li>
  *     <li>DELETE /api/users/:uid/bookmarks/:tid to delete a bookmarked tuit with mentioned tid by user with mentioned uid</li>
+ *     <li>GET api/users/:uid/bookmarks/:tid to check if a particular tuit is bookmarked by the user</li>
+ *     <li>DELETE all the bookmarks created by user</li>
  * </ul>
  * @property {BookmarkDao} bookmarkDao Singleton DAO implementing user CRUD operations
  * @property {BookmarkController} bookmarkController Singleton controller implementing
@@ -35,6 +37,8 @@ export default class BookmarkController implements BookmarkControllerI {
             app.get("/api/users/:uid/bookmarks", BookmarkController.bookmarkController.findAllTuitsBookmarkedByUser);
             app.post("/api/users/:uid/bookmarks/:tid", BookmarkController.bookmarkController.userBookmarksTuit);
             app.delete("/api/users/:uid/bookmarks/:tid", BookmarkController.bookmarkController.userUnBookmarksTuit);
+            app.get("/api/users/:uid/bookmarks/:tid", BookmarkController.bookmarkController.checkIfATuitIsBookmarkedByUser);
+            app.delete("/api/users/:uid/bookmarks", BookmarkController.bookmarkController.deleteAllBookmarksForUser);
         }
         return BookmarkController.bookmarkController;
     }
@@ -75,5 +79,26 @@ export default class BookmarkController implements BookmarkControllerI {
      */
     userUnBookmarksTuit = (req: Request, res: Response) =>
         BookmarkController.bookmarkDao.userUnBookmarksTuit(req.params.tid, req.params.uid)
+            .then(status => res.send(status));
+
+    /**
+     * Checks if a tuit is bookmarked by the user or not.
+     * @param {Request} req Represents request from client
+     * @param {Response} res Represents response to client, including boolean result
+     */
+    checkIfATuitIsBookmarkedByUser = (req: Request, res: Response) =>
+        BookmarkController.bookmarkDao.checkIfATuitIsBookmarkedByUser(req.params.uid,req.params.tid)
+            .then(bookmarks => res.json(bookmarks))
+
+    /**
+     * Removes all bookmark instances from the user account
+     * @param {Request} req Represents request from client, including path
+     * parameter uid identifying the primary key of the logged-in user and tid identifying the primary
+     * key of the tuit that need to be removed form the bookmarks list of the user
+     * @param {Response} res Represents response to client, including status
+     * on whether deleting a user was successful or not
+     */
+    deleteAllBookmarksForUser = (req: Request, res: Response) =>
+        BookmarkController.bookmarkDao.deleteAllBookmarksForUser(req.params.uid)
             .then(status => res.send(status));
 };

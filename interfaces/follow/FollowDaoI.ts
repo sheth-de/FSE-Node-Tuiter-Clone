@@ -39,4 +39,22 @@ export default interface FollowDaoI{
      * @returns Promise To be notified when users are retrieved from the database
      */
     findFollowers (uid: string): Promise<Follow[]>;
+
+    /**
+     * Uses FollowModel to retrieve boolean value whether the user is present in the
+     * following list of other user
+     * @param {string} uid1 current user's primary key
+     * @param {string} uid2 other user's primary key
+     * @returns Promise To be notified when the boolean result is retrieved from the database
+     */
+    checkIfUserPresentInFollowing(uid1: string, uid2:string): Promise<any>;
+
+    /**
+     * Uses FollowModel to retrieve boolean value whether the user is present in the
+     * followers list of other user
+     * @param {string} uid1 current user's primary key
+     * @param {string} uid2 other user's primary key
+     * @returns Promise To be notified when the boolean result is retrieved from the database
+     */
+    checkIfUserPresentInFollowers(uid1: string, uid2:string): Promise<any>;
 };

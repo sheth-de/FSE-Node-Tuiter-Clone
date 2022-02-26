@@ -68,4 +68,23 @@ export default class FollowDao implements FollowDaoI {
     userUnfollowsUser = async (uid1: string, uid2: string): Promise<any> =>
         FollowModel.deleteOne({userFollowing: uid1, userFollowed: uid2});
 
+    /**
+     * Uses FollowModel to retrieve boolean value whether the user is present in the
+     * following list of other user
+     * @param {string} uid1 current user's primary key
+     * @param {string} uid2 other user's primary key
+     * @returns Promise To be notified when the boolean result is retrieved from the database
+     */
+    checkIfUserPresentInFollowing = async (uid1: string, uid2:string): Promise<any> =>
+        await FollowModel.find({userFollowed: uid2, userFollowing: uid1}).count()>0;
+
+    /**
+     * Uses FollowModel to retrieve boolean value whether the user is present in the
+     * followers list of other user
+     * @param {string} uid1 current user's primary key
+     * @param {string} uid2 other user's primary key
+     * @returns Promise To be notified when the boolean result is retrieved from the database
+     */
+    checkIfUserPresentInFollowers = async (uid1: string, uid2:string): Promise<any> =>
+        await FollowModel.find({userFollowed: uid1, userFollowing: uid2}).count()>0;
 };

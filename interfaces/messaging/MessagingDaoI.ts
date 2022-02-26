@@ -37,4 +37,20 @@ export default interface MessagingDaoI {
      * @returns Promise To be notified when message is removed from the database
      */
     deleteMessage(mid: string): Promise<any>;
+
+    /**
+     * Uses MessagingModel to retrieve messages received by the logged-in user from selected user
+     * @param {string} to logged-in User's primary key
+     * @param{string} from the primary key of selected user
+     * @returns Promise To be notified when messages are retrieved from the database
+     */
+    checkMessagesReceivedFromUser(to: string, from: string): Promise<Messaging[]>;
+
+    /**
+     * Uses MessagingModel to retrieve messages sent by the logged-in user to a selected user
+     * @param {string} from logged-in User's primary key
+     * @param {string} to is the selected user's primary key
+     * @returns Promise To be notified when messages are retrieved from the database
+     */
+    checkMessagesSentByUser(from : string, to :string) : Promise<Messaging[]>;
 }

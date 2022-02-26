@@ -15,6 +15,8 @@ import Messaging from "../models/Messaging";
  *     <li>GET /api/messages/received/:to to retrieve messages received by a user </li>
  *     <li>POST /api/messages to record a message sent from one user to another user </li>
  *     <li>DELETE /api/message/:mid to delete a message sent from one user to another </li>
+ *     <li>GET /api/messages/:to/received/:from checks messages received by the user from another user</li>
+ *     <li>GET /api/messages/:from/sent/:to checks messages sent by the user to another user</li>
  * </ul>
  * @property {MessagingDao} messagingDao Singleton DAO implementing likes CRUD operations
  * @property {MessagingController} messagingController Singleton controller implementing
@@ -30,6 +32,8 @@ export default class MessagingController implements MessagingControllerI {
             app.get("/api/messages/received/:to", MessagingController.messagingController.findMessagesReceived);
             app.post("/api/users/:uid1/sends/:uid2", MessagingController.messagingController.createMessage);
             app.delete("/api/message/:mid", MessagingController.messagingController.deleteMessage);
+            app.get("/api/messages/:to/received/:from", MessagingController.messagingController.checkMessagesReceivedFromUser);
+            app.get("/api/messages/:from/sent/:to", MessagingController.messagingController.checkMessagesReceivedFromUser);
         }
         return MessagingController.messagingController;
     }
@@ -82,4 +86,26 @@ export default class MessagingController implements MessagingControllerI {
     deleteMessage = (req: Request, res: Response) =>
         MessagingController.messagingDao.deleteMessage(req.params.mid)
             .then((status) => res.send(status));
+
+    /**
+     * Retrieves all messages that were received by the logged-in user from a selected user
+     * @param {Request} req Represents request from client, including the path
+     * parameter "to" representing the primary key of the logged-in user
+     * @param {Response} res Represents response to client, including the
+     * body formatted as JSON arrays containing the message objects
+     */
+    checkMessagesReceivedFromUser = (req: Request, res: Response) =>
+        MessagingController.messagingDao.checkMessagesReceivedFromUser(req.params.to, req.params.from)
+            .then(messages => res.json(messages))
+
+    /**
+     * Retrieves all messages that were sent by the logged-in user to a selected user
+     * @param {Request} req Represents request from client, including the path
+     * parameter "from" representing the primary key of the logged-in user
+     * @param {Response} res Represents response to client, including the
+     * body formatted as JSON arrays containing the message objects
+     */
+    checkMessagesSentByUser = (req: Request, res: Response) =>
+        MessagingController.messagingDao.checkMessagesSentByUser(req.params.to, req.params.from)
+            .then(messages => res.json(messages))
 };
