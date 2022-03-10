@@ -17,6 +17,7 @@ import TuitController from "./controllers/TuitController";
 import LikeController from "./controllers/LikeController";
 import mongoose from "mongoose";
 var cors = require('cors')
+
 //'mongodb+srv://shethdeva04:MongoConnection123@cluster0.lqk17.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 // build the connection string
 const PROTOCOL = "mongodb+srv";
