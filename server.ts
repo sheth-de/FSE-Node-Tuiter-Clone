@@ -18,11 +18,12 @@ import LikeController from "./controllers/LikeController";
 import mongoose from "mongoose";
 var cors = require('cors')
 
-//'mongodb+srv://shethdeva04:MongoConnection123@cluster0.lqk17.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+require('dotenv').config()
 // build the connection string
 const PROTOCOL = "mongodb+srv";
-const DB_USERNAME = "shethdeva04";
-const DB_PASSWORD = "MongoConnection123";
+
+const DB_USERNAME = process.env.DB_USERNAME;
+const DB_PASSWORD = process.env.DB_PASSWORD;
 const HOST = "cluster0.lqk17.mongodb.net";
 const DB_NAME = "myFirstDatabase";
 const DB_QUERY = "retryWrites=true&w=majority";
