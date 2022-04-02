@@ -38,7 +38,7 @@ export default class LikeController implements LikeControllerI {
             LikeController.likeController = new LikeController();
             app.get("/api/users/:uid/likes", LikeController.likeController.findAllTuitsLikedByUser);
             app.get("/api/tuits/:tid/likes", LikeController.likeController.findAllUsersThatLikedTuit);
-            app.put("/api/users/:uid/likes/:tid", LikeController.likeController.userTogglesTuitLikes);
+            app.put("/api/users/:uid/likes/:tid",LikeController.likeController.userTogglesTuitLikes);
         }
         return LikeController.likeController;
     }
@@ -110,7 +110,8 @@ export default class LikeController implements LikeControllerI {
             await tuitDao.updateLikes(tid, tuit.stats);
             res.sendStatus(200);
         } catch (e) {
-            res.sendStatus(404);
+            console.log(e)
+            res.sendStatus(500);
         }
     }
 };
