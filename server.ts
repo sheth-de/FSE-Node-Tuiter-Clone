@@ -10,11 +10,13 @@
  * Connects to a remote MongoDB instance hosted on the Atlas cloud database
  * service
  */
+
 import express, {Request, Response} from 'express';
 import CourseController from "./controllers/CourseController";
 import UserController from "./controllers/UserController";
 import TuitController from "./controllers/TuitController";
 import LikeController from "./controllers/LikeController";
+import DislikeController from "./controllers/DislikeController";
 import SessionController from "./controllers/SessionController";
 import AuthenticationController from "./controllers/AuthenticationController";
 import mongoose from "mongoose";
@@ -22,15 +24,20 @@ import GroupController from "./controllers/GroupController";
 const cors = require("cors");
 const session = require("express-session");
 require('dotenv').config()
+<<<<<<< HEAD
 
-// build the connection string
+=======
+>>>>>>> 72d9d859f8fe40cfb4b13d7dd94be55699ce1930
+
 const PROTOCOL = "mongodb+srv";
 const DB_USERNAME = process.env.DB_USERNAME;
 const DB_PASSWORD = process.env.DB_PASSWORD;
 const HOST = "cluster0.lqk17.mongodb.net";
 const DB_NAME = "myFirstDatabase";
 const DB_QUERY = "retryWrites=true&w=majority";
-const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;// connect to the database
+
+const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;
+
 mongoose.connect(connectionString);
 
 const app = express();
@@ -67,6 +74,8 @@ const courseController = new CourseController(app);
 const userController = UserController.getInstance(app);
 const tuitController = TuitController.getInstance(app);
 const likesController = LikeController.getInstance(app);
+const dislikesController = DislikeController.getInstance(app);
+
 SessionController(app);
 AuthenticationController(app);
 GroupController(app);
