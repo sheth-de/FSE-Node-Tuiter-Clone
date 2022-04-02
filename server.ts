@@ -24,7 +24,10 @@ import GroupController from "./controllers/GroupController";
 const cors = require("cors");
 const session = require("express-session");
 require('dotenv').config()
+<<<<<<< HEAD
 
+=======
+>>>>>>> 72d9d859f8fe40cfb4b13d7dd94be55699ce1930
 
 const PROTOCOL = "mongodb+srv";
 const DB_USERNAME = process.env.DB_USERNAME;
