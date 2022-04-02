@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const AuthenticationController = (app: Express) => {
-    
+
     const userDao: UserDao = UserDao.getInstance();
 
     const login = async (req: Request, res: Response) => {
@@ -26,6 +26,8 @@ const AuthenticationController = (app: Express) => {
             // @ts-ignore
             req.session['profile'] = existingUser;
             res.json(existingUser);
+            console.log("user found")
+            console.log(req.session);
         } else {
             res.sendStatus(403);
         }
@@ -62,7 +64,7 @@ const AuthenticationController = (app: Express) => {
         if (profile) {
             res.json(profile);
         } else {
-            res.sendStatus(403);
+            res.sendStatus(500);
         }
     }
 
